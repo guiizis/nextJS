@@ -1,8 +1,17 @@
 export function PostComponent() {
+  const names = ['test', 'test 2'];
+
   return (
     <div>
-      <p>test</p>
-      <p>test 2</p>
+     {
+     names.map(arrayItem => {
+      return (
+        <div key={arrayItem}>
+          <h1>{arrayItem}</h1>
+          <p>Some text</p>
+        </div>
+      )
+     })}
     </div>
   )
 }
