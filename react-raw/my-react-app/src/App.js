@@ -3,7 +3,10 @@ import { PostComponent } from './components/Post';
 
 function App() {
   return (
-    <PostComponent />
+    <main>
+      <PostComponent names={['teste', 'teste 2']}/>
+      <PostComponent names={['let', 'const']}/>
+    </main>
   );
 }
 

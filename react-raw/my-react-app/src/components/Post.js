@@ -1,6 +1,4 @@
-export function PostComponent() {
-  const names = ['test', 'test 2'];
-
+export function PostComponent({names}) {
   return (
     <div>
      {
