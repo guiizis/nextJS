@@ -4,8 +4,8 @@ import { PostComponent } from './components/Post';
 function App() {
   return (
     <main>
-      <PostComponent names={['teste', 'teste 2']}/>
-      <PostComponent names={['let', 'const']}/>
+      <PostComponent author='teste' text='teste 2'/>
+      <PostComponent author='let' text='const'/>
     </main>
   );
 }

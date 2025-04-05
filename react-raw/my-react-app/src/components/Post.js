@@ -1,15 +1,12 @@
-export function PostComponent({names}) {
+import classes from './Post.module.css';
+
+export function PostComponent({ author, text }) {
   return (
     <div>
-     {
-     names.map(arrayItem => {
-      return (
-        <div key={arrayItem}>
-          <h1>{arrayItem}</h1>
-          <p>Some text</p>
-        </div>
-      )
-     })}
+      <div className={classes.post}>
+        <h1 className={classes.author}>{author}</h1>
+        <p className={classes.text}>{text}</p>
+      </div>
     </div>
   )
 }
