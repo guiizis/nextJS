@@ -1,15 +1,11 @@
 import { PostComponent } from "../Post/Post";
-import './ListPost.module.css'
+import classes from './ListPost.module.css';
 
 export function ListPostComponent() {
   return (
-    <ul>
-      <li>
-        <PostComponent author='teste' text='teste 2' />
-      </li>
-      <li>
-        <PostComponent author='let' text='const' />
-      </li>
+    <ul className={classes.posts}>
+      <PostComponent author='teste' text='teste 2' />
+      <PostComponent author='let' text='const' />
     </ul>
   )
 }
