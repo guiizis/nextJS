@@ -1,12 +1,15 @@
 import './App.css';
 import MainHeader from './components/HeaderComponents/Header';
 import { ListPostComponent } from './components/ListPosts/ListPost';
+import { OpenModalProvider } from './context/OpenModalContext';
 
 function App() {
   return (
     <main>
-      <MainHeader/>
-      <ListPostComponent/>
+      <OpenModalProvider>
+        <MainHeader />
+        <ListPostComponent />
+      </OpenModalProvider>
     </main>
   );
 }

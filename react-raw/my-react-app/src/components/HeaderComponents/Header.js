@@ -1,8 +1,16 @@
 import { MdPostAdd, MdMessage } from 'react-icons/md';
 
 import classes from './Header.module.css';
+import { useOpenModalSharedState } from '../../context/OpenModalContext';
 
-function MainHeader({ onCreatePost }) {
+function MainHeader() {
+
+  const { setSharedOpenModalValue } = useOpenModalSharedState();
+
+  function createNewPost() {
+    setSharedOpenModalValue(true);
+  }
+
   return (
     <header className={classes.header}>
       <h1 className={classes.logo}>
@@ -10,7 +18,7 @@ function MainHeader({ onCreatePost }) {
         React Poster
       </h1>
       <p>
-        <button className={classes.button} onClick={onCreatePost}>
+        <button className={classes.button} onClick={createNewPost}>
           <MdPostAdd size={18} />
           New Post
         </button>
