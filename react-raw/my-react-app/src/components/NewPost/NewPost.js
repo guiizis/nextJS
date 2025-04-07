@@ -2,7 +2,7 @@ import { useState } from 'react';
 import classes from './NewPost.module.css';
 import { useOpenModalSharedState } from '../../context/OpenModalContext';
 
-function NewPost(props) {
+function NewPost({addPost, onCancel}) {
   const [enteredText, setEnteredText] = useState('test 1');
   const [enteredAuthor, setEnteredAuthor] = useState('test 2');
   const { setSharedOpenModalValue } = useOpenModalSharedState()
@@ -18,14 +18,15 @@ function NewPost(props) {
   function submitHandler(event) {
     event.preventDefault();
     const newPostData = {
+      id: Math.random().toString(),
       body: enteredText,
       author: enteredAuthor
     }
-
+    
     setEnteredText('')
     setEnteredAuthor('')
-
     setSharedOpenModalValue(false)
+    addPost(newPostData)
   }
 
   return (
@@ -40,7 +41,7 @@ function NewPost(props) {
       </p>
       <p className={classes.actions}>
         <button type="submit">Add Post</button>
-        <button type="button" onClick={props.onCancel}>Cancel</button>
+        <button type="button" onClick={onCancel}>Cancel</button>
       </p>
     </form>
   );
