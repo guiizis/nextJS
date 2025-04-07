@@ -7,6 +7,7 @@ import { useState } from "react";
 export function ListPostComponent() {
   const [enteredText, setEnteredText] = useState('test 1');
   const [enteredAuthor, setEnteredAuthor] = useState('test 2');
+  const [modalIsVisible, setModalIsVisible] = useState(true);
 
   function changeBodyHandler(event) {
     setEnteredText(event.target.value);
@@ -16,9 +17,13 @@ export function ListPostComponent() {
     setEnteredAuthor(event.target.value);
   }
 
+  function modalShowHandler() {
+    setModalIsVisible((prev) => !prev);
+  }
+
   return (
     <>
-      <Modal>
+      <Modal showModal={modalShowHandler} isModalVisible={modalIsVisible}>
         <NewPost
           onBodyChange={changeBodyHandler}
           onAuthorChange={changeAuthorHandler}
