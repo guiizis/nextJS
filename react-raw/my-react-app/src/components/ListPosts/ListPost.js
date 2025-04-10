@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOpenModalSharedState } from "../../context/OpenModalContext";
 import { Modal } from "../ModalComponet/modal";
 import NewPost from "../NewPost/NewPost";
@@ -9,13 +9,34 @@ export function ListPostComponent() {
   const [posts, setPosts] = useState([])
   const { setSharedOpenModalValue } = useOpenModalSharedState()
 
+  useEffect(() => {
+      fetch('http://localhost:8080/posts').then(async(posts) => {
+        const postsData = await posts.json()
+        setPosts(() => [...postsData.posts])
+      })
+  },[])
+
   function closeModalHandler() {
     setSharedOpenModalValue(false)
   }
 
   function onAddPostHandler(post) {
+    postData(post)
     setPosts((prev) => [...prev, post])
-    console.log(posts)
+  }
+
+  function postData(newPost) {
+    fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      body: JSON.stringify(newPost),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(async(response) => {
+      return response.json()
+    }).then((data) => {
+      console.log(data)
+    })
   }
 
   return (
