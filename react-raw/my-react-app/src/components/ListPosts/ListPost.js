@@ -7,11 +7,13 @@ import classes from './ListPost.module.css';
 
 export function ListPostComponent() {
   const [posts, setPosts] = useState([])
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true)
   const { setSharedOpenModalValue } = useOpenModalSharedState()
 
   useEffect(() => {
       fetch('http://localhost:8080/posts').then(async(posts) => {
         const postsData = await posts.json()
+        setIsLoadingPosts(false)
         setPosts(() => [...postsData.posts])
       })
   },[])
@@ -47,13 +49,14 @@ export function ListPostComponent() {
           addPost={onAddPostHandler}
         />
       </Modal>
+      {isLoadingPosts && <h1 style={{textAlign: 'center', color:'white'}}>We are Loading your posts!</h1>}
       <ul className={classes.posts}>
-        {posts.length > 0 && posts.map(post => (
+        {!isLoadingPosts && posts.length > 0 && posts.map(post => (
           <PostComponent key={post.id} author={post.author} text={post.body} />
         ))}
       </ul>
-      {posts.length === 0 && (
-        <div style={{textAlign: 'center', color:'white'}}>
+      {!isLoadingPosts && posts.length === 0 && (
+         <div style={{textAlign: 'center', color:'white'}}>
           <h2>No posts found!</h2>
           <h3>Make new Posts =)</h3>
         </div>
