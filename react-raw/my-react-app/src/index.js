@@ -5,22 +5,32 @@ import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import NewPost from './components/NewPost/NewPost';
+import { RootLayout } from './routes/RootLayout';
+import { OpenModalProvider } from './context/OpenModalContext';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/',
+        element: <App />
+      },
+      {
+        path: 'create-post',
+        element: <NewPost />
+      }
+    ]
   },
-  {
-    path: 'create-post',
-    element: <NewPost />
-  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <OpenModalProvider>
+      <RouterProvider router={router} />
+    </OpenModalProvider>
   </React.StrictMode>
 );
 
