@@ -2,8 +2,9 @@ import { useState } from 'react';
 import classes from './NewPost.module.css';
 import { useOpenModalSharedState } from '../../context/OpenModalContext';
 import { Modal } from '../../components/ModalComponet/modal';
+import { Link } from 'react-router-dom'
 
-function NewPost({addPost, onCancel}) {
+function NewPost({ addPost}) {
   const [enteredText, setEnteredText] = useState('test 1');
   const [enteredAuthor, setEnteredAuthor] = useState('test 2');
   const { setSharedOpenModalValue } = useOpenModalSharedState()
@@ -43,7 +44,7 @@ function NewPost({addPost, onCancel}) {
       </p>
       <p className={classes.actions}>
         <button type="submit">Add Post</button>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <Link to="/" type="button">Cancel</Link>
       </p>
     </form>
     </Modal>
