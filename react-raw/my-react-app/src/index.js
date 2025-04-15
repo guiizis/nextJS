@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Posts from './routes/Posts/Posts';
+import Posts, { loader as postLoader } from './routes/Posts/Posts';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import NewPost from './routes/NewPost/NewPost';
@@ -16,6 +16,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Posts />,
+        loader: postLoader,
         children: [
           {
             path: 'create-post',
