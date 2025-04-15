@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useOpenModalSharedState } from "../../context/OpenModalContext";
-import { Modal } from "../ModalComponet/modal";
-import NewPost from "../NewPost/NewPost";
 import { PostComponent } from "../Post/Post";
 import classes from './ListPost.module.css';
 
@@ -43,12 +41,6 @@ export function ListPostComponent() {
 
   return (
     <>
-      <Modal>
-        <NewPost
-          onCancel={closeModalHandler}
-          addPost={onAddPostHandler}
-        />
-      </Modal>
       {isLoadingPosts && <h1 style={{textAlign: 'center', color:'white'}}>We are Loading your posts!</h1>}
       <ul className={classes.posts}>
         {!isLoadingPosts && posts.length > 0 && posts.map(post => (

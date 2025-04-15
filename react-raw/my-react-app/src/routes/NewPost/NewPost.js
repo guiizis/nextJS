@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classes from './NewPost.module.css';
 import { useOpenModalSharedState } from '../../context/OpenModalContext';
+import { Modal } from '../../components/ModalComponet/modal';
 
 function NewPost({addPost, onCancel}) {
   const [enteredText, setEnteredText] = useState('test 1');
@@ -30,6 +31,7 @@ function NewPost({addPost, onCancel}) {
   }
 
   return (
+    <Modal>
     <form className={classes.form} onSubmit={submitHandler}>
       <p className={classes.inputContainer}>
         <label htmlFor="body">Text</label>
@@ -44,6 +46,7 @@ function NewPost({addPost, onCancel}) {
         <button type="button" onClick={onCancel}>Cancel</button>
       </p>
     </form>
+    </Modal>
   );
 }
 

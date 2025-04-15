@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Posts from './routes/Posts/Posts';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import NewPost from './components/NewPost/NewPost';
+import NewPost from './routes/NewPost/NewPost';
 import { RootLayout } from './routes/RootLayout';
 import { OpenModalProvider } from './context/OpenModalContext';
 
@@ -15,11 +15,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <App />
-      },
-      {
-        path: 'create-post',
-        element: <NewPost />
+        element: <Posts />,
+        children: [
+          {
+            path: 'create-post',
+            element: <NewPost />
+          }
+        ]
       }
     ]
   },
