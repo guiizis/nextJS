@@ -1,7 +1,6 @@
 import './Posts.css';
 import { ListPostComponent } from '../../components/ListPosts/ListPost';
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function Posts() {
   return (

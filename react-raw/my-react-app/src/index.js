@@ -4,7 +4,7 @@ import './index.css';
 import Posts, { loader as postLoader } from './routes/Posts/Posts';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import NewPost from './routes/NewPost/NewPost';
+import NewPost, { action as postAction } from './routes/NewPost/NewPost';
 import { RootLayout } from './routes/RootLayout';
 import { OpenModalProvider } from './context/OpenModalContext';
 
@@ -20,7 +20,8 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'create-post',
-            element: <NewPost />
+            element: <NewPost />,
+            action: postAction
           }
         ]
       }

@@ -1,54 +1,51 @@
-import { useState } from 'react';
 import classes from './NewPost.module.css';
-import { useOpenModalSharedState } from '../../context/OpenModalContext';
 import { Modal } from '../../components/ModalComponet/modal';
-import { Link } from 'react-router-dom'
+import { Link, Form, redirect } from 'react-router-dom'
 
-function NewPost({ addPost}) {
-  const [enteredText, setEnteredText] = useState('test 1');
-  const [enteredAuthor, setEnteredAuthor] = useState('test 2');
-  const { setSharedOpenModalValue } = useOpenModalSharedState()
-
-  function changeBodyHandler(event) {
-    setEnteredText(event.target.value);
-  }
-
-  function changeAuthorHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-
-  function submitHandler(event) {
-    event.preventDefault();
-    const newPostData = {
-      id: Math.random().toString(),
-      body: enteredText,
-      author: enteredAuthor
-    }
-    
-    setEnteredText('')
-    setEnteredAuthor('')
-    setSharedOpenModalValue(false)
-    addPost(newPostData)
-  }
+function NewPost() {
 
   return (
     <Modal>
-    <form className={classes.form} onSubmit={submitHandler}>
+    <Form method="post" className={classes.form}>
       <p className={classes.inputContainer}>
         <label htmlFor="body">Text</label>
-        <textarea id="body" required rows={3} onChange={changeBodyHandler} value={enteredText} />
+        <textarea id="body" name="body" required rows={3} />
       </p>
       <p className={classes.inputContainer}>
         <label htmlFor="name">Your name</label>
-        <input type="text" id="name" onChange={changeAuthorHandler} required value={enteredAuthor} />
+        <input type="text" id="name" name="author" required/>
       </p>
       <p className={classes.actions}>
         <button type="submit">Add Post</button>
         <Link to="/" type="button">Cancel</Link>
       </p>
-    </form>
+    </Form>
     </Modal>
   );
+}
+
+export async function action({request}) {
+  const formData = await request.formData()
+  
+  const newPostData = {
+    body: formData.get('body'),
+    author: formData.get('author')
+  }
+
+  fetch('http://localhost:8080/posts', {
+    method: 'POST',
+    body: JSON.stringify(newPostData),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(async (response) => {
+    return response.json()
+  }).then((data) => {
+    console.log(data)
+  })
+
+  return redirect('/')
+
 }
 
 export default NewPost;
