@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import NewPost, { action as postAction } from './routes/NewPost/NewPost';
 import { RootLayout } from './routes/RootLayout';
 import { OpenModalProvider } from './context/OpenModalContext';
+import PostDetails, { loader as PostDetailLoader } from './routes/PostDetail/PostDetail';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,14 @@ const router = createBrowserRouter([
         loader: postLoader,
         children: [
           {
-            path: 'create-post',
+            path: '/create-post',
             element: <NewPost />,
             action: postAction
+          },
+          {
+            path: ':postId',
+            loader: PostDetailLoader,
+            element: <PostDetails />,
           }
         ]
       }

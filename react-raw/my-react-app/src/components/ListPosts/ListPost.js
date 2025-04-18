@@ -15,7 +15,7 @@ export function ListPostComponent() {
     <>
       <ul className={classes.posts}>
         {posts.length > 0 && posts.map(post => (
-          <PostComponent key={post.id} author={post.author} text={post.body} />
+          <PostComponent key={post.id} id={post.id} author={post.author} text={post.body} />
         ))}
       </ul>
       {posts.length === 0 && (
