@@ -1,9 +1,14 @@
 import Image from 'next/image'
 import classes from './page.module.css'
 import { getMealBySlug } from '@/app/lib/meals'
+import { notFound } from 'next/navigation'
 
 export default function MealDetailsPage({ params }) {
   const meal = getMealBySlug(params.mealSlug)
+
+  if (!meal) {
+    notFound()
+  }
 
   return (
     <>
